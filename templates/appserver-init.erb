@@ -1,0 +1,24 @@
+#! /bin/sh
+export JAVA_HOME="<%= scope.lookupvar('::wso2appserver::java_home') %>"
+ 
+startcmd='<%= scope.lookupvar('::wso2appserver::install_dir') %>/wso2as-5.2.0/bin/wso2server.sh start > /dev/null &'
+restartcmd='<%= scope.lookupvar('::wso2appserver::install_dir') %>/wso2as-5.2.0/bin/wso2server.sh restart > /dev/null &'
+stopcmd='<%= scope.lookupvar('::wso2appserver::install_dir') %>/wso2as-5.2.0/bin/wso2server.sh stop > /dev/null &'
+ 
+case "$1" in
+start)
+   echo "Starting WSO2 Application Server ..."
+   su -c "${startcmd}" <%= scope.lookupvar('::wso2appserver::wso2_user') %>
+;;
+restart)
+   echo "Re-starting WSO2 Application Server ..."
+   su -c "${restartcmd}" <%= scope.lookupvar('::wso2appserver::wso2_user') %>
+;;
+stop)
+   echo "Stopping WSO2 Application Server ..."
+   su -c "${stopcmd}" <%= scope.lookupvar('::wso2appserver::wso2_user') %>
+;;
+*)
+   echo "Usage: $0 {start|stop|restart}"
+exit 1
+esac
