@@ -6,16 +6,17 @@ class wso2appserver::install (
   $service     = $::wso2appserver::service,
 ) {
   file { $install_dir:
-    ensure => directory,
-    mode   => 755,
+    ensure   => directory,
+    mode     => '0644',
   }
   file { "/etc/init.d/${service}":
      ensure  => present,
      content => template('wso2appserver/appserver-init.erb'),
+     mode    => '0755'
   }
   staging::deploy { 'wso2as.zip':
-    source  => 'http://dist2.wso2.org/products/application-server/5.2.0/wso2as-5.2.0.zip',
-    target  => $install_dir,
-    creates => "${install_dir}/wso2as-5.2.0",
+    source   => 'http://dist2.wso2.org/products/application-server/5.2.0/wso2as-5.2.0.zip',
+    target   => $install_dir,
+    creates  => "${install_dir}/wso2as-5.2.0",
   }
 }
