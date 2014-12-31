@@ -50,11 +50,17 @@ the fancy stuff with your module here. You must provide your own application zip
 
 Exposed parameters and sample:
  class { 'wso2appserver':
-   wso2_user     => 'wso2user' 
-   install_dir   => '/opt/wso2'
-   source        => 'http://url/to/your/wso2as-5.2.0.zip'
-   java_home     => '/usr/lib/jvm/java'
-   service       => 'wso2as'
+ 
+   wso2_user     => 'wso2user',
+ 
+   install_dir   => '/opt/wso2',
+ 
+   source        => 'http://url/to/your/wso2as-5.2.0.zip',
+ 
+   java_home     => '/usr/lib/jvm/java',
+ 
+   service       => 'wso2as',
+ 
  }
 
 ## Limitations
