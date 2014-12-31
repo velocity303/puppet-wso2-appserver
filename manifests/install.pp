@@ -15,7 +15,7 @@ class wso2appserver::install (
      mode    => '0755'
   }
   staging::deploy { 'wso2as.zip':
-    source   => 'http://dist2.wso2.org/products/application-server/5.2.0/wso2as-5.2.0.zip',
+    source   => $source,
     target   => $install_dir,
     creates  => "${install_dir}/wso2as-5.2.0",
   }
