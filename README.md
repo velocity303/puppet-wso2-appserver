@@ -49,6 +49,7 @@ the fancy stuff with your module here. You must provide your own application zip
 ## Reference
 
 Exposed parameters and sample:
+
  class { 'wso2appserver':
  
    wso2_user     => 'wso2user',
