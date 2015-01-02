@@ -15,65 +15,63 @@
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+This is a Puppet module to install, configure and run the WSO2 Application Server. This is currently developed against RedHat based OS using Puppet 3.7.
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
+This module will install, configure and manage the WSO2 Application Server as described at their product page here:
+http://wso2.com/products/application-server/
 
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+This is currently built specifically against version 5.2
 
 ## Setup
 
+This module requires the use of Nanliu's staging module available here:
+https://forge.puppetlabs.com/nanliu/staging
+
+Please install this before using this module using the command 'puppet module install nanliu-staging'
+
+Afterwards this module can be installed by cloning into your module path and renaming the resulting directory to wso2appserver.
+
 ### What wso2appserver affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+* This module will create a directory /opt/wso2 (this can be altered by using the exposed parameters)
+* Currently the WSO2 version is hard coded but can be modified in the module code. This should be fixed in future versions.
+* Installs the service for WSO2 app server in the path /etc/init.d/
 
 ### Beginning with wso2appserver
-
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
 
 ## Usage
 
 Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+the fancy stuff with your module here. You must provide your own application zip file. This will be named something like wso2as-5.2.0.zip and can be referenced by URL.
 
 ## Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+Exposed parameters and sample:
+
+ class { 'wso2appserver':
+ 
+   wso2_user     => 'wso2user',
+ 
+   install_dir   => '/opt/wso2',
+ 
+   source        => 'http://url/to/your/wso2as-5.2.0.zip',
+ 
+   java_home     => '/usr/lib/jvm/java',
+ 
+   service       => 'wso2as',
+ 
+ }
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+This has been tested against WSO2 App Server 5.2 and RedHat based systems using Puppet 3.7
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+Please submit any issues if you would like to make modifications to this module.
 
-## Release Notes/Contributors/Etc **Optional**
+## Release Notes/Contributors/Etc 
 
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
+Initial release. This is the quick and dirty setup, but should become more polished with time. Let me know if you have any issues with its current state.
