@@ -8,5 +8,6 @@ class wso2appserver::service (
   service { $service:
     ensure  => running,
     require => Class['wso2appserver::configure'],
+    status  => "kill -0 `cat ${install_dir}/wso2as-5.2.0/wso2carbon.pid`"
   }
 }
